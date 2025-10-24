@@ -1,0 +1,134 @@
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #FAF3E0, #EADAC0);
+  position: relative;
+  overflow: hidden;
+}
+
+.register-container {
+  position: relative;
+  overflow: hidden;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #FAF3E0, #EADAC0);
+}
+
+.login-container::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  opacity: 0.08;
+  background: radial-gradient(rgba(139, 94, 60, 0.15) 1px, transparent 1px);
+  background-size: 45px 45px;
+  animation: slide 60s linear infinite;
+}
+
+@keyframes slide {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-200px, -200px);
+  }
+}
+
+
+.auth-container {
+  background: rgba(233, 236, 201, 0.96);
+  backdrop-filter: blur(6px);
+  border-radius: 20px;
+  padding: 40px 30px;
+  box-shadow: 0 12px 35px rgba(62, 39, 35, 0.15);
+  transition: all 0.3s ease-in-out;
+}
+
+
+.auth-title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #3E2723;
+  margin-bottom: 8px;
+  font-family: "Merriweather", serif;
+}
+
+.auth-subtitle {
+  font-size: 1rem;
+  color: #6D4C41;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+
+.auth-input {
+  border-radius: 10px;
+  border: 1px solid #d7ccc8;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  transition: all 0.25s ease;
+  background-color: #fdfaf6;
+}
+
+.auth-input:focus {
+  border-color: #8B5E3C;
+  /* nâu gỗ */
+  box-shadow: 0 0 0 3px rgba(139, 94, 60, 0.25);
+  background-color: #fff;
+}
+
+.form-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #4e342e;
+}
+
+
+.auth-button {
+  background: linear-gradient(135deg, #8B5E3C, #704225);
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 12px;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.auth-button:hover {
+  background: linear-gradient(135deg, #704225, #5d3620);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(112, 66, 37, 0.3);
+}
+
+
+.login-link {
+  font-size: 0.9rem;
+  margin-top: 10px;
+  color: #795548;
+}
+
+.login-link-text {
+  color: #8B5E3C;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.25s;
+}
+
+.login-link-text:hover {
+  color: #5d3620;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .auth-container {
+    padding: 20px 15px;
+  }
+
+  .auth-title {
+    font-size: 1.6rem;
+  }
+}
