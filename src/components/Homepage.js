@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Filter from './Filter';
 import Pagination from './Pagination';
+import { Table } from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 
 export default function Homepage() {
     const userAccount = JSON.parse(localStorage.getItem("userAccount"));
@@ -166,62 +168,118 @@ export default function Homepage() {
                 setSelectedSub={setSelectedSub}
             />
 
-            <div>
-                <div className='fw-medium fs-5 mb-3'>Book Collection</div>
-                <div className='row g-4'>
-                    {displayBooks?.length === 0 ? (
-                        <div>No Books Found!</div>
+            <Table striped bordered hover responsive>
+        <thead className="table-dark text-center align-middle">
+          <tr>
+            <th>Cover</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>ISBN</th>
+            <th>Copies</th>
+            <th>Status</th>
+            <th>Subjects</th>
+            <th>Description</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody className="align-middle text-center">
+          {displayBooks?.length === 0 ? (
+            <tr>
+              <td colSpan={9} className="text-muted py-3">
+                No Books Found!
+              </td>
+            </tr>
+          ) : (
+            displayBooks.map((b) => {
+              const status = getStatus(b.id);
+
+              return (
+                <tr key={b.id}>
+                  {/* Cover */}
+                  <td>
+                    <img
+                      src={b.image}
+                      alt={b.title}
+                      style={{
+                        width: "70px",
+                        height: "90px",
+                        objectFit: "cover",
+                        borderRadius: "4px",
+                      }}
+                    />
+                  </td>
+
+                  {/* Title */}
+                  <td className="fw-semibold">{b.title}</td>
+
+                  {/* Author */}
+                  <td>{b.author}</td>
+
+                  {/* ISBN */}
+                  <td>{b.isbn || "N/A"}</td>
+
+                  {/* Copies */}
+                  <td>
+                    <div className="d-flex flex-column align-items-center">
+                      <div
+                        className={`status-icon ${
+                          status.available ? "bg-success" : "bg-danger"
+                        } rounded-circle`}
+                        style={{ width: "10px", height: "10px" }}
+                      ></div>
+                      <span
+                        className={status.available ? "text-success" : "text-danger"}
+                      >
+                        {status.count} of {status.total}
+                      </span>
+                    </div>
+                  </td>
+
+                  {/* Availability */}
+                  <td>
+                    {status.available ? (
+                      <span className="badge bg-success">
+                        <i className="bi bi-check2-circle"></i> Available
+                      </span>
                     ) : (
-                        displayBooks.map(b => {
-                            const status = getStatus(b.id);
-                            return (
-                                <div key={b.id} className='col-12 col-md-6 col-lg-4 col-xl-3'>
-                                    <div className='book-card card h-100'>
-                                        <div className="book-card-image card-img-top">
-                                            <img className='book-card-image' src={b.image} alt={b.title}></img>
-                                        </div>
-
-                                        {status.available ? (
-                                            <div className='status-badge available'><i className="bi bi-check2-circle"></i> Available</div>
-                                        ) : (
-                                            <div className='status-badge unavailable'><i className="bi bi-x-circle"></i> Unavailable</div>
-                                        )}
-
-                                        <div className='card-body d-flex flex-column'>
-                                            <div className='fw-bold fs-6 book-card-title'>{b.title}</div>
-                                            <div className='d-flex gap-2 small my-1'><i className="bi bi-person"></i>{b.author}</div>
-                                            {b.isbn && (
-                                                <div className='d-flex gap-2 small'><i className="bi bi-hash"></i>{b.isbn}</div>
-                                            )}
-
-                                            <div className='d-flex flex-column flex-xxl-row justify-content-between align-items-xxl-center my-2 gap-2 small'>
-                                                <div className='d-flex align-items-center gap-1'>
-                                                    <div className={`status-icon ${status.available ? 'good' : 'out'}`} />
-                                                    <div>
-                                                        Copies: <span className={status.available ? 'text-success' : 'text-danger'}>{status.count} of {status.total}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className='book-card-description small flex-grow-1'>{getDescription(b.description)}
-                                                <div className='card-subjects'>
-                                                    <hr />
-                                                    <div className='subjects-container'>
-                                                        {b.subjects.map(s => (
-                                                            <div className='subject display' key={s}>{subTag?.find(sub => sub.id === s)?.name}</div>
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button onClick={() => navigate(`/book/${b.id}`)} className='btn btn-primary w-100 mt-3'>View Detail</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })
+                      <span className="badge bg-danger">
+                        <i className="bi bi-x-circle"></i> Unavailable
+                      </span>
                     )}
-                </div>
-            </div>
+                  </td>
+
+                  {/* Subjects */}
+                  <td>
+                    <div className="d-flex flex-wrap justify-content-center gap-1">
+                      {b.subjects?.map((s) => (
+                        <span key={s} className="badge bg-secondary">
+{subTag?.find((sub) => sub.id === s)?.name || s}
+                        </span>
+                      ))}
+                    </div>
+                  </td>
+
+                  {/* Description */}
+                  <td className="text-start small">{getDescription(b.description)}</td>
+
+                  {/* Action */}
+                  <td>
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      onClick={() => navigate(`/book/${b.id}`)}
+                    >
+                      View Detail
+                    </Button>
+                  </td>
+                </tr>
+              );
+            })
+          )}
+        </tbody>
+      </Table>
+
 
             <Pagination
                 totalPages={totalPages}

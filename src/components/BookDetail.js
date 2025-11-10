@@ -108,10 +108,10 @@ export default function BookDetail() {
 
                         <div className='little-detail-container'>
                             {book.isbn && (
-                                <div className='little-detail link'><i className="fa-solid fa-barcode"></i> <a href={`https://openlibrary.org/isbn/${book.isbn}}`} target="_blank" >{book.isbn}</a></div>
+                                <div className='little-detail link'><i className="fa-solid fa-barcode"></i> <a href={`https://openlibrary.org/isbn/${book.isbn}`} target="_blank" >{book.isbn}</a></div>
                             )}
                             {book.olid && (
-                                <div className='little-detail link'><i className="fa-solid fa-barcode"></i> <a href={`https://openlibrary.org/books/${book.olid}}`} target="_blank" >{book.olid}</a></div>
+                                <div className='little-detail link'><i className="fa-solid fa-barcode"></i> <a href={`https://openlibrary.org/books/${book.olid}`} target="_blank" >{book.olid}</a></div>
                             )}
                         </div>
 

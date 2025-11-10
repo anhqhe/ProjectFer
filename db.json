@@ -52,7 +52,7 @@
       "email": "Libra3@gmail.com",
       "phone": "0512345678",
       "avatar": "https://cdn-icons-png.flaticon.com/512/362/362003.png",
-      "status": "active",
+      "status": "inactive",
       "createdAt": "2025-08-25T14:31:01.618Z"
     },
     {
@@ -67,15 +67,26 @@
       "createdAt": "2025-08-26T15:40:43.906Z"
     },
     {
-      "id": "HE186977",
+      "id": "HE186979",
       "role": "Student",
-      "username": "he186977",
+      "username": "he186979",
       "email": "quanganhsk1720@gmail.com",
       "password": "$2b$10$PTq8gWpuAUCTYnf8T5getuqEg4ChntVdl2xIFbc08kmFD/3yachhW",
       "avatar": "https://cdn-icons-png.flaticon.com/512/362/362003.png",
       "phone": null,
       "status": "active",
       "createdAt": "2025-10-22T02:09:24.213Z"
+    },
+    {
+      "id": "HE123123",
+      "role": "Student",
+      "username": "he123123",
+      "email": "quanghieuGH@gmail.com",
+      "password": "$2b$10$mkMmpwuBu4YSkO9pVVc53ulkSIGyZkoAqR51YVs0K3AwvGI82Jur6",
+      "avatar": "https://cdn-icons-png.flaticon.com/512/362/362003.png",
+      "phone": null,
+      "status": "active",
+      "createdAt": "2025-11-10T03:40:39.053Z"
     }
   ],
   "subjects": [
@@ -799,7 +810,7 @@
       "id": "1219",
       "bookId": "lgKNe0V",
       "condition": "Good",
-      "isBorrowed": false,
+      "isBorrowed": true,
       "createTime": 1756257155496
     },
     {
@@ -834,7 +845,7 @@
       "id": "66b0",
       "bookId": "WV0g_5N",
       "condition": "Good",
-      "isBorrowed": false,
+      "isBorrowed": true,
       "createTime": 1756257186788
     },
     {
@@ -969,6 +980,22 @@
       "copyId": "101",
       "borrowDate": "2025-08-26",
       "dueDate": "2025-09-09",
+      "returnDate": null
+    },
+    {
+      "id": "1762745842269",
+      "studentId": "HE190024",
+      "copyId": "66b0",
+      "borrowDate": "2025-11-10",
+      "dueDate": "2025-11-19",
+      "returnDate": null
+    },
+    {
+      "id": "1762746287359",
+      "studentId": "HE123123",
+      "copyId": "1219",
+      "borrowDate": "2025-11-10",
+      "dueDate": "2025-11-20",
       "returnDate": null
     }
   ],

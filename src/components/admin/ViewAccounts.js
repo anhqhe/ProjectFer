@@ -49,22 +49,25 @@ export default function ViewAccounts() {
     useEffect(() => {
         let newUserView = [...users];
 
-
+        // 🔹 Search by username or ID
         if (searchTerm.trim() !== "") {
-            newUserView = newUserView.filter(u =>
-                u.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                u.id.toLowerCase().includes(searchTerm.toLowerCase())
+            newUserView = newUserView.filter(
+                (u) =>
+                    u.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    u.id.toLowerCase().includes(searchTerm.toLowerCase())
             );
         }
 
+        // 🔹 Filter by role
         if (roleFilter !== "all") {
-            newUserView = newUserView.filter(u => u.role === roleFilter);
+            newUserView = newUserView.filter((u) => u.role === roleFilter);
         }
 
+        // 🔹 Filter by status (Fixed)
         if (statusSort !== "none") {
-            newUserView = newUserView.sort((a, b) => {
-                return statusSort === "asc" ? (a.status.localeCompare(b.status)) : (b.status.localeCompare(a.status))
-            });
+            newUserView = newUserView.filter(
+                (u) => u.status && u.status.toLowerCase() === statusSort.toLowerCase()
+            );
         }
 
         setUserView(newUserView);
@@ -130,10 +133,13 @@ export default function ViewAccounts() {
                     <option value="Librarian">Librarian</option>
                     <option value="Student">Student</option>
                 </FormSelect>
-                <FormSelect value={statusSort} onChange={e => setStatusSort(e.target.value)}>
-                    <option value="none">Không sắp xếp</option>
-                    <option value="asc">Sắp xếp trạng thái ↑</option>
-                    <option value="desc">Sắp xếp trạng thái ↓</option>
+                <FormSelect
+                    value={statusSort}
+                    onChange={(e) => setStatusSort(e.target.value)}
+                >
+                    <option value="none">No Filter</option>
+                    <option value="active">Show Active Only</option>
+                    <option value="inactive">Show Inactive Only</option>
                 </FormSelect>
             </Form>
 
