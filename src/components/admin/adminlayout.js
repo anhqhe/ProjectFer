@@ -6,7 +6,7 @@ export default function AdminLayout() {
     // const user = JSON.parse(localStorage.getItem("userAccount"))
     // const navigate = useNavigate()
     // if (!user || user.role !== 'Admin') {
-    //     alert("Bạn không có quyền truy cập trang này")
+    //     alert("You do not have permission to access this page")
     //     navigate('/homepage')
     // }
     return (

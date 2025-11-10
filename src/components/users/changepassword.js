@@ -15,17 +15,17 @@ export default function ChangePasswordForm({ setIsShowChangePass }) {
     const handleChangePassword = async () => {
     const checkPassOld = bcrypt.compareSync(oldPassword, userAccount.password)
         if (!checkPassOld) {
-            alert("Mật khẩu cũ không đúng");
+            alert("Old password is incorrect");
             return;
         }
 
         if (!checkPass.test(newPassword)) {
-            alert("Mật khẩu mới phải có chữ hoa, chữ thường, số, ký tự đặc biệt và tối thiểu 6 ký tự");
+            alert("New password must contain uppercase, lowercase, number, special character and be at least 6 characters long");
             return;
         }
        
         if (newPassword !== confirmPassword) {
-            alert("Xác nhận mật khẩu không khớp");
+            alert("Password confirmation does not match");
             return;
         }
         const randomHashPass = bcrypt.genSaltSync(10);
@@ -42,30 +42,30 @@ export default function ChangePasswordForm({ setIsShowChangePass }) {
                 JSON.stringify({ ...userAccount, password: hashPass})
             );
 
-            alert("Đổi mật khẩu thành công!");
+            alert("Password changed successfully!");
             setOldPassword("");
             setNewPassword("");
             setConfirmPassword("");
             setIsShowChangePass(false)
         } catch (error) {
             console.error(error);
-            alert("Lỗi khi đổi mật khẩu");
+            alert("Error changing password");
         }
     };
 
     return (
         <Form className="p-3">
-            <h4 className="mb-3">Đổi mật khẩu</h4>
+            <h4 className="mb-3">Change Password</h4>
 
             <Form.Group className="mb-3">
-                <Form.Label>Mật khẩu cũ</Form.Label>
+                <Form.Label>Old Password</Form.Label>
                 <InputGroup>
                     <InputGroup.Text>
                         <Key size={16} />
                     </InputGroup.Text>
                     <Form.Control
                         type = "password"
-                        placeholder="Nhập mật khẩu cũ"
+                        placeholder="Enter old password"
                         value={oldPassword}
                         onChange={(e) => setOldPassword(e.target.value)}
                     />
@@ -73,14 +73,14 @@ export default function ChangePasswordForm({ setIsShowChangePass }) {
             </Form.Group>
 
             <Form.Group className="mb-3">
-                <Form.Label>Mật khẩu mới</Form.Label>
+                <Form.Label>New Password</Form.Label>
                 <InputGroup>
                     <InputGroup.Text>
                         <Lock size={16} />
                     </InputGroup.Text>
                     <Form.Control
                         type = "password"
-                        placeholder="Nhập mật khẩu mới"
+                        placeholder="Enter new password"
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
                     />
@@ -88,14 +88,14 @@ export default function ChangePasswordForm({ setIsShowChangePass }) {
             </Form.Group>
 
             <Form.Group className="mb-3">
-                <Form.Label>Xác nhận mật khẩu</Form.Label>
+                <Form.Label>Confirm Password</Form.Label>
                 <InputGroup>
                     <InputGroup.Text>
                         <Lock size={16} />
                     </InputGroup.Text>
                     <Form.Control
                         type = "password"
-                        placeholder="Xác nhận mật khẩu mới"
+                        placeholder="Confirm new password"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />

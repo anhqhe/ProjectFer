@@ -18,7 +18,7 @@ export default function HeaderV2() {
     const handlerLogout = () => {
         if (!userAccount) return
         localStorage.removeItem("userAccount")
-        alert("Đăng xuất thành công!")
+        alert("Logout successful!")
         setIsLogin(false)
         setTimeout(() => {
             navigate("/login")

@@ -16,7 +16,7 @@ export default function Profile() {
     const [isShowChangePass, setIsShowChangePass] = useState(false)
     const navigate = useNavigate()
     if(userAccount.id != id && userAccount.role != "Admin" ) {
-        alert("Bạn không có quyền xem trang này")
+        alert("You do not have permission to view this page")
         navigate("/homepage")
     }
     let isViewByAuthor = false;
@@ -65,7 +65,7 @@ export default function Profile() {
 
     const handleSave = () => {
         if(!PhoneRegex.test(formData.phone)) {
-            alert("Số điện thoại phải đubsf chuẩn việt Nam bắt đầu bằng 0  và dủ 10 số")
+            alert("Phone number must be in Vietnamese format, starting with 0 and having 10 digits")
             return 
         }
         axios
@@ -76,16 +76,16 @@ export default function Profile() {
                 status: formData.status,
             })
             .then(() => {
-                alert("Cập nhật thành công!");
+                alert("Update successful!");
                 setUser(formData);
                 setIsEditing(false);
                 localStorage.setItem("userAccount", JSON.stringify(formData));
             })
-            .catch(() => alert("Có lỗi xảy ra khi cập nhật!"));
+            .catch(() => alert("An error occurred during update!"));
     };
 
-    if (loading) return <p>Đang tải dữ liệu...</p>;
-    if (!user) return <p>Không tìm thấy người dùng!</p>;
+    if (loading) return <p>Loading data...</p>;
+    if (!user) return <p>User not found!</p>;
 
     return (
         <Container className="user-profile-container">
@@ -116,11 +116,11 @@ export default function Profile() {
 
 
                     <div className="profile-note">
-                        <p><strong>Ghi chú:</strong></p>
+                        <p><strong>Note:</strong></p>
                         <ul>
-                            <li>Các trường có dấu <span className="required">*</span> có thể chỉnh sửa</li>
-                            <li>Có thể thay đổi ảnh đại diện bằng cách bấm icon <Camera size={14} /></li>
-                            <li>Trạng thái <b>Status</b> có thể bật / tắt bằng nút chuyển nếu bạn tắt status bạn sẽ không thể đăng nhập được vì vậy lưu ý trước khi chỉnh sửa , liên hệ thư viện nếu bạn cần mở lại tài khoản</li>
+                            <li>Fields marked with <span className="required">*</span> can be edited</li>
+                            <li>You can change your avatar by clicking the <Camera size={14} /> icon</li>
+                            <li>The <b>Status</b> can be toggled on/off. If you turn off status, you will not be able to log in, so be careful before editing. Contact the library if you need to reactivate your account</li>
                         </ul>
                     </div>
                 </Col>

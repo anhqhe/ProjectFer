@@ -15,7 +15,7 @@ export default function ViewAccounts() {
     const user = JSON.parse(localStorage.getItem("userAccount"))
     const navigate = useNavigate()
     if (!user || user.role !== 'Admin') {
-        alert("Bạn không có quyền truy cập trang này")
+        alert("You do not have permission to access this page")
         navigate('/homepage')
     }
     const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
@@ -102,33 +102,33 @@ export default function ViewAccounts() {
             {
                 from_name: "System Bot",
                 to_email: user?.email,
-                message: `Xin chào ${user?.username || "bạn"}, đây là mật khẩu mặc định : ${newPass}. Bạn có thể Sử dung nó để truy câp lại tài khoản của mình và đổi lại mật khẩu. Vui lòng không chia sẻ mã này cho bất kỳ ai khác.`
+                message: `Hello ${user?.username || "there"}, this is your default password: ${newPass}. You can use it to access your account and change your password. Please do not share this code with anyone.`
             },
             publicKey
         )
             .then((result) => {
-                alert(" Gửi thành công!");
+                alert("Sent successfully!");
 
             })
             .catch((error) => {
-                alert("Lỗi gửi mail!");
+                alert("Error sending email!");
                 console.error("FAILED:", error);
             });
     };
     return (
         <Container className="user-table-container" fluid>
-            <h2 className="dashboard-title">Danh sách người dùng</h2>
+            <h2 className="dashboard-title">User List</h2>
 
 
             <Form className="filters">
                 <Form.Control
                     type="text"
-                    placeholder="Tìm theo tên hoặc ID..."
+                    placeholder="Search by name or ID..."
                     value={searchTerm}
                     onChange={e => setSearchTerm(e.target.value)}
                 />
                 <FormSelect value={roleFilter} onChange={e => setRoleFilter(e.target.value)}>
-                    <option value="all">Tất cả role</option>
+                    <option value="all">All roles</option>
                     <option value="Admin">Admin</option>
                     <option value="Librarian">Librarian</option>
                     <option value="Student">Student</option>
@@ -148,13 +148,13 @@ export default function ViewAccounts() {
                 <thead>
                     <tr>
 
-                        <th>NGƯỜI DÙNG</th>
+                        <th>USER</th>
                         <th>ID</th>
                         <th>Email</th>
-                        <th>LOẠI TÀI KHOẢN</th>
-                        <th>NGÀY ĐĂNG KÝ</th>
-                        <th>TRẠNG THÁI</th>
-                        <th>THAO TÁC</th>
+                        <th>ACCOUNT TYPE</th>
+                        <th>REGISTRATION DATE</th>
+                        <th>STATUS</th>
+                        <th>ACTIONS</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -177,7 +177,7 @@ export default function ViewAccounts() {
                                             className="bi bi-circle-fill"
                                             style={{ color: "green", fontSize: "10px", marginRight: "5px" }}
                                         ></i>
-                                        Hoạt động
+                                        Active
                                     </>
                                 ) : (
                                     <>
@@ -185,17 +185,17 @@ export default function ViewAccounts() {
                                             className="bi bi-circle-fill"
                                             style={{ color: "red", fontSize: "10px", marginRight: "5px" }}
                                         ></i>
-                                        Bị khóa
+                                        Locked
                                     </>
                                 )}
                             </td>
 
                             <td className="actions">
-                                <button className="view-btn" onClick={() => navigate(`/profile/id/${user.id}/isAuthor/${false}`)}>Xem</button>
+                                <button className="view-btn" onClick={() => navigate(`/profile/id/${user.id}/isAuthor/${false}`)}>View</button>
                                 <button className={`action-link ban-button ${user.status === 'inactive' ? 'unban-button' : ''}`}
                                     onClick={() => handleLock(user.id)}>
                                     <i className={`bi ${user.status === 'inactive' ? 'bi-unlock' : 'bi-ban'}`}></i>
-                                    {user.status === 'active' ? "Khóa" : "Mở khóa"}
+                                    {user.status === 'active' ? "Lock" : "Unlock"}
                                 </button>
                                 <button
                                     className="action-link reset-pasword-btn"

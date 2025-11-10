@@ -15,7 +15,7 @@ export default function Sidebar() {
         e.preventDefault()
 
         localStorage.removeItem("userAccount")
-        alert("Đăng xuất thành công")
+        alert("Logout successful")
         navigate('/login')
     }
 
@@ -24,28 +24,28 @@ export default function Sidebar() {
             <Col className="sidebar-container">
                 <div className="sidebar-header">
                     <h5 className="mt-4">Admin Panel</h5>
-                    <p>Quản lý hệ thống Library Portal</p>
+                    <p>Library Portal Management System</p>
                 </div>
 
                 <Nav className="flex-column sidebar-nav">
-                    <p>ĐIỀU HƯỚNG</p>
+                    <p>NAVIGATION</p>
                     <Nav.Link as={Link} to="/admin/dashboard">
                         <i className="bi bi-speedometer2"></i>
-                        <span>Tổng quan</span>
+                        <span>Overview</span>
                     </Nav.Link>
-                    <p>QUẢN LÝ TÀI KHOẢN</p>
+                    <p>ACCOUNT MANAGEMENT</p>
                     <Nav.Link as={Link} to="/admin/viewUsers">
                         <i className="bi bi-people"></i>
-                        <span>Tất cả tài khoản</span>
+                        <span>All Accounts</span>
                     </Nav.Link>
-                    <p>THAO TÁC</p>
+                    <p>ACTIONS</p>
                     <Nav.Link as={Link} to="/admin/create">
                         <i className="bi bi-person-plus"></i>
-                        <span>Tạo tài khoản mới</span>
+                        <span>Create New Account</span>
                     </Nav.Link>
                     <Nav.Link onClick={handelLogout} className="logout">
                         <i className="bi bi-box-arrow-right"></i>
-                        <span>Đăng xuất</span></Nav.Link>
+                        <span>Logout</span></Nav.Link>
                 </Nav>
             </Col>
         </Row>

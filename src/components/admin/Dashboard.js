@@ -11,7 +11,7 @@ export default function Dashboard() {
     const [acc, setAcc] = useState([])
     const user = JSON.parse(localStorage.getItem("userAccount"))
     if (!user || user.role !== 'Admin') {
-        alert("Bạn không có quyền truy cập trang này")
+        alert("You do not have permission to access this page")
         navigate('/homepage')
     }
     const navigate = useNavigate()
@@ -55,14 +55,14 @@ export default function Dashboard() {
         <div className="dashboard-box p-4">
             <Row className="stats-row">
                 <h3 className="dashboard-title">
-                    Tổng quan hệ thống
+                    System Overview
                 </h3>
 
                 <Col md={4} className="mb-4">
                     <div className="stat-card primary">
                         <div className="stat-title">
                             <i className="bi bi-people-fill"></i>
-                            Tổng số tài khoản
+                            Total Accounts
                         </div>
                         <div className="stat-value">{totalAcc}</div>
                     </div>
@@ -71,7 +71,7 @@ export default function Dashboard() {
                     <div className="stat-card success">
                         <div className="stat-title">
                             <i className="bi bi-person-check-fill"></i>
-                            Tài khoản đang hoạt động
+                            Active Accounts
                         </div>
                         <div className="stat-value">{totalAccActive}</div>
                     </div>
@@ -80,7 +80,7 @@ export default function Dashboard() {
                     <div className="stat-card danger">
                         <div className="stat-title">
                             <i className="bi bi-person-x-fill"></i>
-                            Tài khoản bị khóa
+                            Locked Accounts
                         </div>
                         <div className="stat-value">{totalAccInactive}</div>
                     </div>
@@ -88,9 +88,9 @@ export default function Dashboard() {
             </Row>
             <Row className="mb-4">
                 <Col className="recent-accounts-header">
-                    Danh sách tài khoản gần đây
+                    Recent Accounts List
                     <Link to="/admin/viewUsers" className="view-all-link">
-                        Xem tất cả <i className="bi bi-arrow-right"></i>
+                        View All <i className="bi bi-arrow-right"></i>
                     </Link>
                 </Col>
             </Row>
@@ -101,11 +101,11 @@ export default function Dashboard() {
                         <Table className="accounts-table">
                             <thead>
                                 <tr style={{ backgroundColor: "black" }}>
-                                    <th>Người dùng</th>
-                                    <th>Loại tài khoản</th>
-                                    <th>Ngày đăng ký</th>
-                                    <th>Trạng thái</th>
-                                    <th>Thao tác</th>
+                                    <th>User</th>
+                                    <th>Account Type</th>
+                                    <th>Registration Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -114,17 +114,17 @@ export default function Dashboard() {
                                         <td>{a.email}</td>
                                         <td>{a.role}</td>
                                         <td>{new Date(a.createdAt).toLocaleTimeString()} {new Date(a.createdAt).toLocaleDateString()}</td>
-                                        <td>{a.status === 'active' ? "Hoạt động" : "Không hoạt động"}</td>
+                                        <td>{a.status === 'active' ? "Active" : "Inactive"}</td>
                                         <td className="action-table-button">
                                             <Link to={`/profile/id/${a.id}/isAuthor/${false}`} className="action-link">
-                                                <i className="bi bi-eye"></i> Xem
+                                                <i className="bi bi-eye"></i> View
                                             </Link>
                                             <button
                                                 className={`action-link ban-button ${a.status === 'inactive' ? 'unban-button' : ''}`}
                                                 onClick={() => handleLock(a.id)}
                                             >
                                                 <i className={`bi ${a.status === 'inactive' ? 'bi-unlock' : 'bi-ban'}`}></i>
-                                                {a.status === 'inactive' ? 'Mở khóa' : 'Khóa'}
+                                                {a.status === 'inactive' ? 'Unlock' : 'Lock'}
                                             </button>
                                         </td>
                                     </tr>

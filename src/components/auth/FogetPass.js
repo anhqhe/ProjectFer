@@ -30,7 +30,7 @@ export default function ForgotPassword() {
                 const checkEmail = userList.find(u => u.email === email)
                 const user = userList.find(u => u.email === email)
                 if (!checkEmail) {
-                    alert('Tài khoản Email không tồn tại trong hệ thống')
+                    alert('Email account does not exist in the system')
                     return
                 }
                 setShowOtp(true)
@@ -49,16 +49,16 @@ export default function ForgotPassword() {
             {
                 from_name: "System Bot",
                 to_email: user?.email,
-                message: `Xin chào ${user?.username || "bạn"}, đây là mã OTP để đặt lại mật khẩu: ${otp}. Vui lòng không chia sẻ mã này cho bất kỳ ai khác.`
+                message: `Hello ${user?.username || "there"}, this is your OTP code to reset your password: ${otp}. Please do not share this code with anyone.`
             },
             publicKey
         )
             .then((result) => {
-                alert("OTP đã gửi thành công!");
+                alert("OTP sent successfully!");
                 console.log("SUCCESS:", result);
             })
             .catch((error) => {
-                alert("Lỗi gửi mail!");
+                alert("Error sending email!");
                 console.error("FAILED:", error);
             });
     };
@@ -83,9 +83,9 @@ export default function ForgotPassword() {
 
         if (otp === genOtp) {
             setShowNewPass(true)
-            alert('Xác minh OTP thành công, bạn cần nhập mật khẩu mới')
+            alert('OTP verification successful, please enter a new password')
         } else {
-            alert('Mã OTP không chính xác')
+            alert('Incorrect OTP code')
         }
 
     }
@@ -94,19 +94,19 @@ export default function ForgotPassword() {
         e.preventDefault();
 
         if (!cpassword.trim() || !password.trim()) {
-            alert('Mật khẩu không được để trống')
+            alert('Password cannot be empty')
             return
         }
 
         if (cpassword !== password) {
-            alert('Mật khẩu không khớp')
+            alert('Passwords do not match')
             return
         }
 
          const checkPass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
 
         if (!checkPass.test(password)) {
-            alert("Mật khẩu phải có chữ hoa, chữ thường, số, ký tự đặc biệt và đọ dài trên 6 ký tự");
+            alert("Password must contain uppercase, lowercase, number, special character and be at least 6 characters long");
             return
         }
 
@@ -126,7 +126,7 @@ export default function ForgotPassword() {
 
                 axios.patch(`http://localhost:9999/users/${userId}`, newPass)
                     .then(result => {
-                        alert('Cập nhật mật khẩu thành công')
+                        alert('Password updated successfully')
                         navigate('/login')
                     })
                     .catch(err => console.error(err))
@@ -141,8 +141,8 @@ export default function ForgotPassword() {
                     <div className="auth-container">
 
                         <div className="text-center mb-4">
-                            <h2 className="auth-title">Bạn Quên Mật Khẩu?</h2>
-                            <p className="auth-subtitle">Đừng lo, chúng tôi sẽ giúp bạn khôi phục lại tài khoản ngay!</p>
+                            <h2 className="auth-title">Forgot Your Password?</h2>
+                            <p className="auth-subtitle">Don't worry, we'll help you recover your account right away!</p>
                         </div>
 
                         {!showOtp && !showNewPass && (
@@ -151,15 +151,15 @@ export default function ForgotPassword() {
                                     <Form.Label className="form-lable">
                                         <i className="bi bi-envelope me-2"></i>Email *
                                     </Form.Label>
-                                    <Form.Control className="auth-input" type="email" placeholder="Nhập email..." onChange={(e) => setEmail(e.target.value)} required></Form.Control>
+                                    <Form.Control className="auth-input" type="email" placeholder="Enter email..." onChange={(e) => setEmail(e.target.value)} required></Form.Control>
                                 </Form.Group>
 
                                 <Button className="auth-button w-100 mt-2" type="submit">
-                                    <i className="bi bi-person-plus me-2"></i>Gửi
+                                    <i className="bi bi-person-plus me-2"></i>Send
                                 </Button>
 
                                 <div className="text-center mt-2 login-link">
-                                    Bạn chưa có tài khoản? <Link to={`/login`} className="login-link-text">Đăng nhập</Link>
+                                    Don't have an account? <Link to={`/login`} className="login-link-text">Login</Link>
                                 </div>
                             </Form>
                         )}
@@ -169,16 +169,16 @@ export default function ForgotPassword() {
 
                                 <Form.Group className="mb-3">
                                     <Form.Label className="form-label">
-                                        <i className="bi bi-lock me-2"></i>Mã OTP *
+                                        <i className="bi bi-lock me-2"></i>OTP Code *
                                     </Form.Label>
-                                    <Form.Control className="auth-input" type="number" placeholder="Nhập mã OTP..." onChange={e => setOtp(e.target.value)} required></Form.Control>
+                                    <Form.Control className="auth-input" type="number" placeholder="Enter OTP code..." onChange={e => setOtp(e.target.value)} required></Form.Control>
                                 </Form.Group>
 
                                 <Button className="auth-button w-100 mt-2" type="submit">
-                                    <i className="bi bi-person-plus me-2"></i>Xác nhận OTP
+                                    <i className="bi bi-person-plus me-2"></i>Verify OTP
                                 </Button>
                                 <Col className="text-center mt-2 login-link">
-                                    <a href='' onClick={handleResend} style={{ textDecoration: 'none' }}>Gửi lại mã OTP</a>
+                                    <a href='' onClick={handleResend} style={{ textDecoration: 'none' }}>Resend OTP code</a>
                                 </Col>
                             </Form>
                         )}
@@ -188,20 +188,20 @@ export default function ForgotPassword() {
 
                                 <Form.Group className="mb-3">
                                     <Form.Label className="form-label">
-                                        <i className="bi bi-lock me-2"></i>Mật khẩu *
+                                        <i className="bi bi-lock me-2"></i>Password *
                                     </Form.Label>
-                                    <Form.Control className="auth-input" type="password" placeholder="Nhập mật khẩu..." onChange={e => setPassword(e.target.value)} required></Form.Control>
+                                    <Form.Control className="auth-input" type="password" placeholder="Enter password..." onChange={e => setPassword(e.target.value)} required></Form.Control>
                                 </Form.Group>
 
                                 <Form.Group className="mb-3">
                                     <Form.Label className="form-label">
-                                        <i className="bi bi-lock me-2"></i>Xác nhận mật khẩu *
+                                        <i className="bi bi-lock me-2"></i>Confirm Password *
                                     </Form.Label>
-                                    <Form.Control className="auth-input" type="password" placeholder="Nhập lại mật khẩu..." onChange={e => setCpassword(e.target.value)} required></Form.Control>
+                                    <Form.Control className="auth-input" type="password" placeholder="Re-enter password..." onChange={e => setCpassword(e.target.value)} required></Form.Control>
                                 </Form.Group>
 
                                 <Button className="auth-button w-100 mt-2" type="submit">
-                                    <i className="bi bi-person-plus me-2"></i>Cập nhật mật khẩu
+                                    <i className="bi bi-person-plus me-2"></i>Update Password
                                 </Button>
                             </Form>
                         )}

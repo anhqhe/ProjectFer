@@ -16,17 +16,17 @@ export default function Register() {
         e.preventDefault();
 
         if (!password.trim() || !Cpassword.trim()) {
-            alert('Bạn cần điền đủ thông tin')
+            alert('You need to fill in all information')
             return
         }
         if (password !== Cpassword) {
-            alert('Mật khẩu không khớp')
+            alert('Passwords do not match')
             return
         }
 
         const checkPass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
         if (!checkPass.test(password)) {
-            alert("Mật khẩu phải có chữ hoa, chữ thường, số, ký tự đặc biệt và độ dài trên 6 ký tự");
+            alert("Password must contain uppercase, lowercase, number, special character and be at least 6 characters long");
             return
         }
 
@@ -39,11 +39,11 @@ export default function Register() {
                 const checkEmail = userList.find(e => e.email === email)
                 const checkId = userList.find(e => e.id === id)
                 if (checkEmail) {
-                    alert("Email đã tồn tại trong hệ thống")
+                    alert("Email already exists in the system")
                     return
                 }
                 if (checkId) {
-                    alert("ID đã tồn tại trong hệ thống")
+                    alert("ID already exists in the system")
                     return
                 }
 
@@ -81,19 +81,19 @@ export default function Register() {
                 <Col md={6} className="px-4 mt-4">
                     <div className="auth-container mt-4">
                         <div className="text-center mb-4">
-                            <h2 className="auth-title">Đăng Ký Tài Khoản</h2>
-                            <p className="auth-subtitle">Tham gia thư viện đọc sách ngay hôm nay</p>
+                            <h2 className="auth-title">Register Account</h2>
+                            <p className="auth-subtitle">Join the library today</p>
                         </div>
 
                         <Form onSubmit={handleRegister}>
                             <Form.Group className="mb-3">
-                                <Form.Label>MSSV hoặc Staff ID *</Form.Label>
+                                <Form.Label>Student ID or Staff ID *</Form.Label>
                                 <InputGroup>
                                     <InputGroup.Text><i className="bi bi-person-badge"></i></InputGroup.Text>
                                     <Form.Control
                                         className="auth-input"
                                         type="text"
-                                        placeholder="Nhập MSSV hoặc Staff ID..."
+                                        placeholder="Enter Student ID or Staff ID..."
                                         value={id}
                                         onChange={e => setId(e.target.value)}
                                         required
@@ -108,7 +108,7 @@ export default function Register() {
                                     <Form.Control
                                         className="auth-input"
                                         type="email"
-                                        placeholder="Nhập email..."
+                                        placeholder="Enter email..."
                                         value={email}
                                         onChange={e => setEmail(e.target.value)}
                                         required
@@ -117,13 +117,13 @@ export default function Register() {
                             </Form.Group>
 
                             <Form.Group className="mb-3">
-                                <Form.Label>Mật khẩu *</Form.Label>
+                                <Form.Label>Password *</Form.Label>
                                 <InputGroup>
                                     <InputGroup.Text><i className="bi bi-lock"></i></InputGroup.Text>
                                     <Form.Control
                                         className="auth-input"
                                         type="password"
-                                        placeholder="Nhập mật khẩu..."
+                                        placeholder="Enter password..."
                                         value={password}
                                         onChange={e => setPassword(e.target.value)}
                                         required
@@ -132,13 +132,13 @@ export default function Register() {
                             </Form.Group>
 
                             <Form.Group className="mb-3">
-                                <Form.Label>Xác nhận mật khẩu *</Form.Label>
+                                <Form.Label>Confirm Password *</Form.Label>
                                 <InputGroup>
                                     <InputGroup.Text><i className="bi bi-lock"></i></InputGroup.Text>
                                     <Form.Control
                                         className="auth-input"
                                         type="password"
-                                        placeholder="Nhập lại mật khẩu..."
+                                        placeholder="Re-enter password..."
                                         value={Cpassword}
                                         onChange={e => setCpassword(e.target.value)}
                                         required
@@ -147,12 +147,12 @@ export default function Register() {
                             </Form.Group>
 
                             <Button className="auth-button w-100" type="submit">
-                                <i className="bi bi-person-plus me-2"></i>Tạo tài khoản
+                                <i className="bi bi-person-plus me-2"></i>Create Account
                             </Button>
                         </Form>
 
                         <div className="text-center mt-4 login-link">
-                            Đã có tài khoản? <Link to={`/login`} className="login-link-text">Đăng nhập</Link>
+                            Already have an account? <Link to={`/login`} className="login-link-text">Login</Link>
                         </div>
                     </div>
                 </Col>

@@ -10,7 +10,7 @@ export default function CreateAccountByAdmin() {
     const navigate = useNavigate()
     const user = JSON.parse(localStorage.getItem("userAccount"))
     if (!user || user.role !== 'Admin') {
-        alert("Bạn không có quyền truy cập trang này")
+        alert("You do not have permission to access this page")
         navigate('/homepage')
     }
     const [account, setAccount] = useState({
@@ -39,7 +39,7 @@ export default function CreateAccountByAdmin() {
 
         const checkPass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
         if (!checkPass.test(account.password)) {
-            alert("Mật khẩu phải có chữ hoa, chữ thường, số, ký tự đặc biệt và độ dài trên 6 ký tự");
+            alert("Password must contain uppercase, lowercase, number, special character and be at least 6 characters long");
             return
         }
 
@@ -54,11 +54,11 @@ export default function CreateAccountByAdmin() {
                 const checkEmail = userList.find(e => e.email === account.email)
                 const checkId = userList.find(e => e.id === account.id)
                 if (checkEmail) {
-                    alert("Email đã tồn tại trong hệ thống")
+                    alert("Email already exists in the system")
                     return
                 }
                 if (checkId) {
-                    alert("ID đã tồn tại trong hệ thống")
+                    alert("ID already exists in the system")
                     return
                 }
 
@@ -81,13 +81,13 @@ export default function CreateAccountByAdmin() {
             <h1 className="dashboard-title">Create Account</h1>
             <Form onSubmit={handleCreate} className="create-account-form">
                 <Form.Group className="mb-3">
-                    <Form.Label>MSSV hoặc Staff ID *</Form.Label>
+                    <Form.Label>Student ID or Staff ID *</Form.Label>
                     <InputGroup>
                         <InputGroup.Text><i className="bi bi-person-badge"></i></InputGroup.Text>
                         <Form.Control
                             className="auth-input"
                             type="text"
-                            placeholder="Nhập MSSV hoặc Staff ID..."
+                            placeholder="Enter Student ID or Staff ID..."
                             onChange={e => setAccount({ ...account, id: e.target.value })}
                             required
                         />
@@ -101,7 +101,7 @@ export default function CreateAccountByAdmin() {
                         <Form.Control
                             className="auth-input"
                             type="email"
-                            placeholder="Nhập email..."
+                            placeholder="Enter email..."
                             onChange={e => setAccount({ ...account, email: e.target.value })}
                             required
                         />
@@ -120,13 +120,13 @@ export default function CreateAccountByAdmin() {
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                    <Form.Label>Mật khẩu *</Form.Label>
+                    <Form.Label>Password *</Form.Label>
                     <InputGroup>
                         <InputGroup.Text><i className="bi bi-lock"></i></InputGroup.Text>
                         <Form.Control
                             className="auth-input"
                             type="password"
-                            placeholder="Nhập mật khẩu..."
+                            placeholder="Enter password..."
                             onChange={e => setAccount({ ...account, password: e.target.value })}
                             required
                         />
@@ -134,13 +134,13 @@ export default function CreateAccountByAdmin() {
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                    <Form.Label>Xác nhận mật khẩu *</Form.Label>
+                    <Form.Label>Confirm Password *</Form.Label>
                     <InputGroup>
                         <InputGroup.Text><i className="bi bi-lock"></i></InputGroup.Text>
                         <Form.Control
                             className="auth-input"
                             type="password"
-                            placeholder="Nhập lại mật khẩu..."
+                            placeholder="Re-enter password..."
                             onChange={e => setCpassword(e.target.value)}
                             required
                         />
@@ -148,7 +148,7 @@ export default function CreateAccountByAdmin() {
                 </Form.Group>
                 <div className="d-flex justify-content-start">
                     <Button className="auth-button" type="submit">
-                        <i className="bi bi-person-plus me-2"></i>Tạo tài khoản
+                        <i className="bi bi-person-plus me-2"></i>Create Account
                     </Button>
                 </div>
             </Form>

@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/Header.css';
 import { useEffect, useState } from 'react';
 
-// Không dùng header này nữa. Dùng header V2.
+// This header is no longer used. Use header V2.
 
 export default function Header() {
     const navigate = useNavigate();
@@ -18,7 +18,7 @@ export default function Header() {
     const handlerLogout = () => {
         if (!userAccount) return;
         localStorage.removeItem("userAccount");
-        alert("Đăng xuất thành công!");
+        alert("Logout successful!");
         setIsLogin(false);
         setTimeout(() => {
             navigate("/login");

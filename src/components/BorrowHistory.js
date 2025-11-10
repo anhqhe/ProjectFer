@@ -64,7 +64,7 @@ export default function BorrowHistory() {
 
         setRecords(joined);
       } catch (err) {
-        console.error("Lỗi load borrow history:", err);
+        console.error("Error loading borrow history:", err);
       } finally {
         setLoading(false);
       }
