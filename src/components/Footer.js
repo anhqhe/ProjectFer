@@ -5,7 +5,7 @@ export default function Footer() {
         <footer className="page-container footer-container">
             <div className='footer-content'>
                 <div className='d-flex flex-column justify-content-center align-items-center'>
-                    <div className='footer-header'>eFPT Library – Your Gateway to Academic Resources at FPT University</div>
+                    <div className='footer-header'>eFPT Library – Your Gateway to Academic Resources at FPT Universitysadqwe</div>
                     <div>Supporting FPT students with trusted resources for learning, research, and success.</div>
                 </div>
                 <div className='brand-container'>
